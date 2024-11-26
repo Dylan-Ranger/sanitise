@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 @Table(name = "words")
 public class Word {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "word", nullable = false, unique = true)
