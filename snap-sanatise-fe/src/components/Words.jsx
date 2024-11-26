@@ -9,16 +9,17 @@ export default function Words() {
       if (!response.ok) {
         // handle error
       }
-      const words = response.json()
-      console.log(words)
+      const words = await response.json()
+      setWords(words)
     }
     fetchData()
   }, [])
   return (
     <div>
-      {words.length > 0 &&
+      {words && words.length > 0 &&
         words.map((word) => {
-          return <Word text={word.word} />
+          console.log(word)
+          return <Word word={word.word} key={word.word} />
         })
       }
     </div>
