@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.wordDialog::backdrop {
+    background: rgba(0, 0, 0, 0.9);
+}
