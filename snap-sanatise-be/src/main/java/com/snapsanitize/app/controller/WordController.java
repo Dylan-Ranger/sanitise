@@ -11,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -40,16 +42,23 @@ public class WordController {
 
 
     @PostMapping
-    public ResponseEntity<String> addWord(@RequestBody Word word) {
+    public ResponseEntity<Map<String, Object>> addWord(@RequestBody Word word) {
         Optional<Word> existingWord = wordRepository.findByWord(word.getWord());
         if (existingWord.isPresent()) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", "That word already exists!");
             return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body("Word already exists");
+                    .body(errorResponse);
         }
 
-        wordRepository.save(word);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Word added successfully");
+        Word savedWord = wordRepository.save(word);
+
+        
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Word added successfully");
+        response.put("word", savedWord);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
 
