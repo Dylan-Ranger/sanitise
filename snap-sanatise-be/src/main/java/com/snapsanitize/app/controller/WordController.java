@@ -2,7 +2,6 @@ package com.snapsanitize.app.controller;
 
 import com.snapsanitize.app.model.Word;
 import com.snapsanitize.app.repository.WordRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,8 +18,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/word") // Base URL for all endpoints
 public class WordController {
-
-
     private final WordRepository wordRepository;
 
     public WordController(WordRepository wordRepository) {
@@ -53,7 +50,6 @@ public class WordController {
 
         Word savedWord = wordRepository.save(word);
 
-        
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Word added successfully");
         response.put("word", savedWord);
@@ -63,19 +59,25 @@ public class WordController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateWord(
+    public ResponseEntity<Map<String, Object>> updateWord(
             @PathVariable Long id, @RequestBody Word word) {
         Optional<Word> existingWord = wordRepository.findById(id);
         if (existingWord.isEmpty()) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", "That word does not exist!");
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Word not found");
+                    .body(errorResponse);
         }
 
         Word updatedWord = existingWord.get();
         updatedWord.setWord(word.getWord());
         wordRepository.save(updatedWord);
 
-        return ResponseEntity.ok("Word updated successfully");
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Word updated successfully");
+        response.put("word", updatedWord);
+
+        return ResponseEntity.ok(response);
     }
 
 
