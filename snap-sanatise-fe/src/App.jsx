@@ -6,7 +6,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="p-4 h-svh py-8 lg:px-0 lg:w-3/4">
+    <div className="p-4 h-svh py-8 lg:px-0 lg:w-3/4 3xl:w-1/2">
       <h1 className="text-4xl font-extrabold tex-black mb-6">Text Sanitiser</h1>
       <Words />
       <SanitiseContainer />
