@@ -1,6 +1,5 @@
 package com.snapsanitize.app.controller;
 
-import com.snapsanitize.app.model.Word;
 import com.snapsanitize.app.service.SanitisationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/sanitise")
 public class SanitisationController {
