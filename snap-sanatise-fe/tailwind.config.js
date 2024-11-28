@@ -11,6 +11,9 @@ export default {
         "gray": "#393E46",
         "blue": "#00ADB5",
         "white": "#EEEEEE"
+      },
+      screens: {
+        '3xl': '1800px'
       }
     },
   },
