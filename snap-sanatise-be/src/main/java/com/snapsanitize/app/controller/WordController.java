@@ -1,7 +1,9 @@
 package com.snapsanitize.app.controller;
 
+import com.snapsanitize.app.common.ApiResponse;
 import com.snapsanitize.app.model.Word;
 import com.snapsanitize.app.repository.WordRepository;
+import com.snapsanitize.app.service.WordService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,80 +18,43 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/word") // Base URL for all endpoints
+@RequestMapping("/word")
 public class WordController {
-    private final WordRepository wordRepository;
+    private final WordService wordService;
 
-    public WordController(WordRepository wordRepository) {
-        this.wordRepository = wordRepository;
+    public WordController(WordService wordService) {
+        this.wordService = wordService;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Word> getWordById(@PathVariable Long id) {
-        Optional<Word> word = wordRepository.findById(id);
-        return word.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .build());
+    public ResponseEntity<ApiResponse<Word>> getWordById(@PathVariable Long id) {
+        Word word = wordService.getWordById(id);
+        return ResponseEntity.ok(new ApiResponse<>("Word found", word));
     }
 
     @GetMapping("/list")
-    public List<Word> getAllWords() {
-        return wordRepository.findAll();
+    public ResponseEntity<ApiResponse<List<Word>>> getAllWords() {
+        List<Word> words = wordService.getAllWords();
+        return ResponseEntity.ok(new ApiResponse<>("Words retrieved successfully", words));
     }
-
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> addWord(@RequestBody Word word) {
-        Optional<Word> existingWord = wordRepository.findByWord(word.getWord());
-        if (existingWord.isPresent()) {
-            Map<String, Object> errorResponse = new HashMap<>();
-            errorResponse.put("message", "That word already exists!");
-            return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body(errorResponse);
-        }
-
-        Word savedWord = wordRepository.save(word);
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("message", "Word added successfully");
-        response.put("word", savedWord);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    public ResponseEntity<ApiResponse<Word>> addWord(@RequestBody Word word) {
+        Word savedWord = wordService.addWord(word);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new ApiResponse<>("Word added successfully", savedWord));
     }
-
 
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> updateWord(
-            @PathVariable Long id, @RequestBody Word word) {
-        Optional<Word> existingWord = wordRepository.findById(id);
-        if (existingWord.isEmpty()) {
-            Map<String, Object> errorResponse = new HashMap<>();
-            errorResponse.put("message", "That word does not exist!");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(errorResponse);
-        }
-
-        Word updatedWord = existingWord.get();
-        updatedWord.setWord(word.getWord());
-        wordRepository.save(updatedWord);
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("message", "Word updated successfully");
-        response.put("word", updatedWord);
-
-        return ResponseEntity.ok(response);
+    public ResponseEntity<ApiResponse<Word>> updateWord(@PathVariable Long id,@RequestBody Word word) {
+        Word updatedWord = wordService.updateWord(id, word);
+        return ResponseEntity.ok(new ApiResponse<>("Word updated successfully", updatedWord));
     }
 
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteWord(@PathVariable Long id) {
-        if (!wordRepository.existsById(id)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Word not found");
-        }
-
-        wordRepository.deleteById(id);
-        return ResponseEntity.ok("Word deleted successfully");
+    public ResponseEntity<ApiResponse<Void>> deleteWord(@PathVariable Long id) {
+        wordService.deleteWord(id);
+        return ResponseEntity.ok(new ApiResponse<>("Word deleted successfully", null));
     }
 }
 
