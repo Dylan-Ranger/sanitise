@@ -15,7 +15,7 @@ export default function Words() {
         // TODO: handle error
       }
       const words = await response.json()
-      setWords(words)
+      setWords(words.data)
     }
     fetchData()
   }, [])

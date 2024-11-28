@@ -50,7 +50,7 @@ const AddWord = forwardRef(function AddWord(
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const result = await response.json()
-      onUpdate(result.word)
+      onUpdate(result.data)
       setWord(null)
       dialog.current.close()
     } catch (error) {
