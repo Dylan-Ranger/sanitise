@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  frontend:
+    build:
+      context: ./snap-sanatise-fe
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./snap-sanatise-fe:/app
+      - /app/node_modules
+    command: npm run dev
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+  backend:
+    build:
+      context: ./snap-sanatise-be
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./snap-sanatise-be:/app
+      - /app/target
+    command: ./mvnw spring-boot:run
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+
