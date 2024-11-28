@@ -24,20 +24,34 @@ export default function Words() {
   }
   function handleWordsUpdate(word) {
     setWords(prevState => {
-      return [...prevState, word]
+      return prevState.some(w => w.id === word.id)
+        ? prevState.map(w => w.id === word.id ? word : w)
+        : [...prevState, word];
+    });
+  }
+
+  function handleDeleteWord(word) {
+    setWords(prevState => {
+      return prevState.filter(w => word.id !== w.id)
     })
   }
+
   return (
     <>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap gap-2 mb-6">
         {words && words.length > 0 &&
           words.map((word) => {
-            return <Word word={word.word} key={word.word} />
+            return <Word
+              word={word}
+              key={word.word}
+              update={handleWordsUpdate}
+              onDelete={handleDeleteWord}
+            />
           })
         }
       </div>
       <button
-        className="text-white bg-gray py-2 px-4 w-[150px] rounded-xl"
+        className="text-white bg-gray py-2 px-4 w-[150px] rounded-xl mb-6"
         onClick={handleOpenWordModal}>
         Add New Word
       </button>
