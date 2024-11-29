@@ -41,14 +41,14 @@ public class WordController {
                 .body(new SanitiseApiResponse<>("Word added successfully", savedWord));
     }
 
-    @Operation(summary = "Add an existing word", description = "Update an existing word")
+    @Operation(summary = "Update", description = "Update an existing word")
     @PutMapping("/{id}")
     public ResponseEntity<SanitiseApiResponse<Word>> updateWord(@PathVariable Long id, @RequestBody Word word) {
         Word updatedWord = wordService.updateWord(id, word);
         return ResponseEntity.ok(new SanitiseApiResponse<>("Word updated successfully", updatedWord));
     }
 
-    @Operation(summary = "Delete a word", description = "Delete and existing word")
+    @Operation(summary = "Delete a word", description = "Delete an existing word")
     @DeleteMapping("/{id}")
     public ResponseEntity<SanitiseApiResponse<Void>> deleteWord(@PathVariable Long id) {
         wordService.deleteWord(id);
