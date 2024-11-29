@@ -12,11 +12,11 @@ On the backend, saved words are retrieved from the database and used to sanitize
    - **Capitalisation**: The sanitiser accounts for various case formats (e.g., "Word", "word") to ensure all instances are replaced.
    - **Word Boundaries**: Only whole words are replaced, preventing partial word matches (e.g., "test" in "contest").
    - **Punctuation**: Punctuation around words is preserved without interfering with the sanitization.
-   - **Foreign Characters**: Special characters like accents (e.g., café) are handled correctly, ensuring that words with foreign characters are sanitized.
+   - **Foreign Characters**: Special characters like accents (e.g., café) are handled correctly, ensuring that words with foreign characters are sanitized. I did have trouble getting the regex to handle foreign characters and the other edge-cases combined; that is something that can be improved. 
    - **Hyphenated Words**: Hyphenated words (e.g., "sensitive-word") are excluded from sanitization to avoid accidental replacements.
    - **Partial Matches**: Only exact matches of sensitive words are replaced; partial matches within other words (e.g., "sensitive" in "insensitive") are ignored.
 
-For this project, I adopted a modular approach to ensure scalability and maintainability. The backend is built using Spring Boot, leveraging its robust support for RESTful APIs and Spring Data JPA for seamless database interactions. I chose Maven as the build tool to manage dependencies and streamline the build process, ensuring consistency across environments. The frontend is developed using React with Tailwind CSS, enabling rapid UI development with a utility-first approach to styling. I opted for a single-page application (SPA) architecture to provide a smooth user experience without full page reloads.
+For this project, I adopted a modular approach to ensure maintainability. The backend is built using Spring Boot, leveraging its robust support for RESTful APIs and Spring Data JPA for seamless database interactions. I chose Maven as the build tool to manage dependencies and streamline the build process. The frontend is developed using React with Tailwind CSS, enabling rapid UI development with a utility-first approach to styling. I opted for a single-page application architecture to provide a smooth user experience without full page reloads.
 
 Trade-offs made include using an in-memory database (H2) for simplicity during development, which could be swapped for a production database later. Additionally, I prioritized functionality over advanced UI styling to focus on core features, ensuring that the user interface is functional and responsive. This approach strikes a balance between speed of development and maintainability, allowing for easy extension and scalability in the future.
 
@@ -51,23 +51,9 @@ I wrote unit tests for each application layer using Mockito and JUnit, covering 
 
 All backend tests runnable via runnning `./mvnw test` in the main directory.
 
-## Features
+## Documentation
+The initial setup has been done for openapi docs in the project. You can access the docs here [This link](http://localhost:8080/docs.html) 
 
-### Backend
-- **Sanitization API**: Replace sensitive words in text with asterisks.
-- **CRUD Operations**: Add, update, delete, and list sensitive words.
-- **Database Integration**: Store and retrieve sensitive words using a database.
-- **Testing**: Unit tests for each application layer.
-
-### Frontend
-- **Text Sanitization Testing**: Easily test the sanitization functionality via a UI.
-- **Word Management**: Add, update, delete, and view sensitive words through a user-friendly, responsive interface.
-
-### Core Technologies
-- **Backend**: Spring Boot (Java)
-- **Frontend**: React (with Vite for fast development)
-- **Database**: H2, in-memory database. (This can be replaced at a later stage)
-- **Docker**: Front- and back-end run in their own isolated containers.
 
 ## Setup Instructions
 
