@@ -24,7 +24,6 @@ export default function SanitiseContainer() {
     if (!response.ok) {
       const errorResult = await response.json()
       setMessage(errorResult.message)
-      console.log(errorResult)
       throw new Error("Text could not be sanitised")
     }
     const result = await response.json()
