@@ -21,7 +21,14 @@ public class SanitisationController {
 
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> addWord(@RequestBody String textToSanitise) {
+    public ResponseEntity<Map<String, Object>> sanitiseString(@RequestBody String textToSanitise) {
+        if (textToSanitise == null || textToSanitise.trim().isEmpty() || !textToSanitise.matches(".*\\w.*")) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Invalid input");
+            errorResponse.put("message", "Input must not be empty and must contain at least one word.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+        }
+
         String result = service.sanitise(textToSanitise);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "String sanitised successfully");
