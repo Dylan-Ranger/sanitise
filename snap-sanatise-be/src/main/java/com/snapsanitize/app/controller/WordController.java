@@ -4,6 +4,7 @@ import com.snapsanitize.app.common.SanitiseApiResponse;
 import com.snapsanitize.app.model.Word;
 import com.snapsanitize.app.service.WordService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class WordController {
 
     @Operation(summary = "Add word", description = "Create a new word")
     @PostMapping
-    public ResponseEntity<SanitiseApiResponse<Word>> addWord(@RequestBody Word word) {
+    public ResponseEntity<SanitiseApiResponse<Word>> addWord(@Valid @RequestBody Word word) {
         Word savedWord = wordService.addWord(word);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new SanitiseApiResponse<>("Word added successfully", savedWord));
@@ -43,7 +44,7 @@ public class WordController {
 
     @Operation(summary = "Update", description = "Update an existing word")
     @PutMapping("/{id}")
-    public ResponseEntity<SanitiseApiResponse<Word>> updateWord(@PathVariable Long id, @RequestBody Word word) {
+    public ResponseEntity<SanitiseApiResponse<Word>> updateWord(@PathVariable Long id, @Valid @RequestBody Word word) {
         Word updatedWord = wordService.updateWord(id, word);
         return ResponseEntity.ok(new SanitiseApiResponse<>("Word updated successfully", updatedWord));
     }

@@ -2,6 +2,7 @@ package com.snapsanitize.app.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 
 @Entity
@@ -14,6 +15,7 @@ public class Word {
 
     @Column(name = "word", nullable = false, unique = true)
     @NotBlank(message = "Word cannot be empty")
+    @Pattern(regexp = "^[a-zA-Z]+([-a-zA-Z0-9#]*)\\+{0,2}$|^[a-zA-Z0-9]+([#]+[a-zA-Z0-9]*)+$\n", message = "That word is not allowed.")
     private String word;
 
     public Word() {
