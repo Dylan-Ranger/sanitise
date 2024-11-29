@@ -5,14 +5,12 @@ import AddWord from "./AddWord.jsx";
 export default function Words() {
   const dialog = useRef()
   const [words, setWords] = useState([])
-  // TODO: loading
-  // TODO: emtpy state
+
   useEffect( () => {
     const fetchData = async () => {
-      // TODO: externalise back end url to env.
       const response = await fetch('http://localhost:8080/word/list')
       if (!response.ok) {
-        // TODO: handle error
+
       }
       const words = await response.json()
       setWords(words.data)

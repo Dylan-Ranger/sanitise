@@ -1,10 +1,10 @@
 package com.snapsanitize.app.common;
 
-public class ApiResponse<T> {
+public class SanitiseApiResponse<T> {
     private String message;
     private T data;
 
-    public ApiResponse(String message, T data) {
+    public SanitiseApiResponse(String message, T data) {
         this.message = message;
         this.data = data;
     }

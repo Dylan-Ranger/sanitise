@@ -3,12 +3,15 @@ import React from 'react';
 export default function SanitiseContainer() {
   const [input, setInput] = useState('')
   const [sanitisedString, setSanitisedString] = useState('')
+  const [message, setMessage] = useState('')
 
   function handleTextInput(event) {
     setInput(event.target.value)
   }
   async function handleSanitiseString(event) {
     event.preventDefault()
+    setMessage('')
+    setSanitisedString('')
     const response = await fetch(
       'http://localhost:8080/sanitise', {
         method: 'POST',
@@ -19,6 +22,9 @@ export default function SanitiseContainer() {
       }
     )
     if (!response.ok) {
+      const errorResult = await response.json()
+      setMessage(errorResult.message)
+      console.log(errorResult)
       throw new Error("Text could not be sanitised")
     }
     const result = await response.json()
@@ -40,6 +46,7 @@ export default function SanitiseContainer() {
           value={input}
           onChange={handleTextInput}
         ></textarea>
+        <p className="text-sm text-red-700 mb-6 -mt-6">{message}</p>
         <button
           className="text-white bg-gray py-2 px-4 w-[150px] rounded-xl mb-6"
           disabled={!input}>
@@ -50,15 +57,15 @@ export default function SanitiseContainer() {
         <>
           <div className="flex justify-between">
             <h2 className="text-3xl font-extrabold mb-6">Result</h2>
-            <div className="flex justify-center"
+            <div className="flex justify-center cursor-pointer"
                  onClick={handleCopyResult}>
-              <p className="pt-2 mr-2 font-bold">Copied</p>
+              <p className="pt-2 mr-2 font-bold">Copy Text</p>
               <img
                 src={'/copy.png'}
                 className="block h-10 w-10"/>
             </div>
           </div>
-          <p className="leading-8" id="sanitisedText">
+          <p className="leading-8 pb-20" id="sanitisedText">
             {sanitisedString.split('\\n').map((text, index) => (
               <React.Fragment key={index}>
                 {text}

@@ -1,6 +1,7 @@
 package com.snapsanitize.app.controller;
 
 import com.snapsanitize.app.service.SanitisationService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,10 @@ public class SanitisationController {
         this.service = service;
     }
 
-
+    @Operation(
+            summary = "Sanitise a string",
+            description = "Sanitises the input string by removing unwanted words. Words can be managed via the /word end point."
+    )
     @PostMapping
     public ResponseEntity<Map<String, Object>> sanitiseString(@RequestBody String textToSanitise) {
         if (textToSanitise == null || textToSanitise.trim().isEmpty() || !textToSanitise.matches(".*\\w.*")) {
