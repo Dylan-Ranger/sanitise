@@ -4,21 +4,21 @@ Snap-Sanitise is a microservice with an accompanying web interface designed to h
 
 ## General Approach and Design Decisions
 
-The application is designed as a simple server-client CRUD application. The frontend provides a user interface (UI) where users can manage words, characters, and phrases. A modal allows users to click on UI tiles to select words, while a textbox enables users to type or paste text. A button then sends the text to the server for processing. 
+The application is designed as a simple server-client CRUD application. The frontend provides a user interface where users can manage words, characters, and phrases. Users can click on UI tiles to select words, and edit them via a modal. A textbox enables users to type or paste text and to submit to the server for processing. 
 
-On the backend, saved words are retrieved from the database and used to sanitize the input string. The sanitization is performed using a regular expression and the `replaceAll` method to replace all instances of sensitive words with asterisks (******).
+On the backend, saved words are retrieved from the database and used to sanitize the input string. The sanitisation is performed using a regular expression and the `replaceAll` method to replace all instances of sensitive words with asterisks (******).
 
-**Handling Edge Cases**: Several edge cases were accounted for in the sanitization process:
+**Handling Edge Cases**: Several edge cases were accounted for in the sanitisation process:
    - **Capitalisation**: The sanitiser accounts for various case formats (e.g., "Word", "word") to ensure all instances are replaced.
    - **Word Boundaries**: Only whole words are replaced, preventing partial word matches (e.g., "test" in "contest").
-   - **Punctuation**: Punctuation around words is preserved without interfering with the sanitization.
-   - **Foreign Characters**: Special characters like accents (e.g., café) are handled correctly, ensuring that words with foreign characters are sanitized. I did have trouble getting the regex to handle foreign characters and the other edge-cases combined; that is something that can be improved. 
-   - **Hyphenated Words**: Hyphenated words (e.g., "sensitive-word") are excluded from sanitization to avoid accidental replacements.
+   - **Punctuation**: Punctuation around words is preserved without interfering with the sanitisation.
+   - **Foreign Characters**: Special characters like accents (e.g., café) are handled correctly, ensuring that words with foreign characters are sanitised. I did have trouble getting the regex to handle foreign characters and the other edge-cases combined; that is something that can be improved. 
+   - **Hyphenated Words**: Hyphenated words (e.g., "sensitive-word") are excluded from sanitisation to avoid accidental replacements.
    - **Partial Matches**: Only exact matches of sensitive words are replaced; partial matches within other words (e.g., "sensitive" in "insensitive") are ignored.
 
 For this project, I adopted a modular approach to ensure maintainability. The backend is built using Spring Boot, leveraging its robust support for RESTful APIs and Spring Data JPA for seamless database interactions. I chose Maven as the build tool to manage dependencies and streamline the build process. The frontend is developed using React with Tailwind CSS, enabling rapid UI development with a utility-first approach to styling. I opted for a single-page application architecture to provide a smooth user experience without full page reloads.
 
-Trade-offs made include using an in-memory database (H2) for simplicity during development, which could be swapped for a production database later. Additionally, I prioritized functionality over advanced UI styling to focus on core features, ensuring that the user interface is functional and responsive. This approach strikes a balance between speed of development and maintainability, allowing for easy extension and scalability in the future.
+Trade-offs made include using an in-memory database (H2) for simplicity during development, which could be swapped for a production database later. On setup, the database is seeded with some sample words. Additionally, I prioritized functionality over advanced UI styling to focus on core features, ensuring that the user interface is functional and responsive. This approach strikes a balance between speed of development and maintainability, allowing for easy extension and scalability in the future.
 
 
 ```plaintext
@@ -27,7 +27,7 @@ snap-sanitise/
     └── src/
         └── main/
             └── java/
-                └── snapsanitize/
+                └── snapsanitise/
                     └── app/
                         ├── common/           # General utility/global classes
                         ├── config/           # Configuration classes
@@ -47,13 +47,12 @@ snap-sanitise/
 
 ## Testing
 
-I wrote unit tests for each application layer using Mockito and JUnit, covering repositories, services, and controllers. I also tested all edge cases of the sanitization algorithm to ensure robust functionality. Although I intended to write component-based tests for the React UI, I ran out of time and instead manually tested the frontend. 
+I wrote unit tests for each application layer on the back end using Mockito and JUnit. I covered repositories, services, and controllers. I also tested all edge cases of the sanitisation algorithm to ensure robust functionality. Although I intended to write component-based tests for the React UI, I ran out of time and instead manually tested the frontend. 
 
 All backend tests runnable via runnning `./mvnw test` in the main directory.
 
 ## Documentation
 The initial setup has been done for openapi docs in the project. You can access the docs here [This link](http://localhost:8080/docs.html) 
-
 
 ## Setup Instructions
 
@@ -85,6 +84,6 @@ The initial setup has been done for openapi docs in the project. You can access 
 3. run `npm run dev`. This will tell vite to start your front end application.
 4. You can confirm that your app is running by visiting [This link](http://localhost:3000/).
 
-*If you can't run the application by either of these means, your local development setup may differ from mine. In that case, best of luck to you.*
+*If you can't run the application by either of these means, your local development setup may differ from mine. In that case, contact me and we can debug your setup.*
 
 
