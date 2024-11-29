@@ -2,7 +2,6 @@ package com.snapsanitize.app.controller;
 
 import com.snapsanitize.app.common.ApiResponse;
 import com.snapsanitize.app.model.Word;
-import com.snapsanitize.app.repository.WordRepository;
 import com.snapsanitize.app.service.WordService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,10 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/word")
