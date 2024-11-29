@@ -6,3 +6,5 @@ INSERT INTO words (word) VALUES ('yellow');
 INSERT INTO words (word) VALUES ('green');
 INSERT INTO words (word) VALUES ('red');
 INSERT INTO words (word) VALUES ('blue');
+INSERT INTO words (word) VALUES ('café');
+INSERT INTO words (word) VALUES ('c#');
