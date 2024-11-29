@@ -2,9 +2,11 @@ package com.snapsanitize.app.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 
 @Entity
 @Table(name = "words")
+@Builder
 public class Word {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +19,8 @@ public class Word {
     public Word() {
     }
 
-    public Word(String word) {
+    public Word(Long id, String word) {
+        this.id = id;
         this.word = word;
     }
 
