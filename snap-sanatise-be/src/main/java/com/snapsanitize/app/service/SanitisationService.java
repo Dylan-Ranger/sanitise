@@ -18,16 +18,17 @@ public class SanitisationService {
 
     public String sanitise(String userInput) {
         List<Word> words = repository.findAll();
-
         String sanitisedString = userInput;
         for (Word word : words) {
             String token= "*".repeat(word.getWord().length());
             String regex = "(?i)\\b\\Q" + word.getWord() + "\\E\\b(?=[.,?!\\s]*|$)(?!\\s*-|')";
+            if (stringContainsSpecialCharacters(word.getWord())) {
+                regex = word.getWord();
+            }
             sanitisedString = sanitisedString.replaceAll(regex, token);
         }
         return sanitisedString;
     }
-
     private boolean stringContainsSpecialCharacters(String string) {
         return Pattern.compile(".*[^a-zA-Z0-9].*").matcher(string).matches();
     }
