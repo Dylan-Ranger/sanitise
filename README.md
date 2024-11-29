@@ -36,21 +36,20 @@ snap-sanitise/
                         ├── repository/       # JPARepository classes
                         ├── service/          # Service layers
 snap-sanitise/
-└── frontend/
+└── snap-sanitise-fe/
     ├── public/                # Public files (e.g., index.html)
     └── src/                   # Source files
         ├── assets/            # Static assets (images, fonts, etc.)
         ├── components/        # React components
         ├── App.jsx            # Main application file
         └── index.js           # Entry point for the app
+```
 
 ## Testing
-
 
 I wrote unit tests for each application layer using Mockito and JUnit, covering repositories, services, and controllers. I also tested all edge cases of the sanitization algorithm to ensure robust functionality. Although I intended to write component-based tests for the React UI, I ran out of time and instead manually tested the frontend. 
 
 All backend tests runnable via runnning `./mvnw test` in the main directory.
-
 
 ## Features
 
