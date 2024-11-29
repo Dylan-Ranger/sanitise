@@ -10,7 +10,7 @@ export default function Word({word, update, onDelete}) {
   return (
     <>
       <div
-        className="relative bg-blue rounded-md py-2 px-4 text-white hover:scale-110 cursor-pointer"
+        className="relative bg-blue rounded-md py-1 px-2 lg:py-2 lg:px-4 text-white hover:scale-110 cursor-pointer"
         onClick={() => handleOpenModal()}>
         {word.word}
       </div>
