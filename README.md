@@ -1,12 +1,12 @@
 # Snap-Sanitise: Sensitive Words Management and Sanitisation Microservice
 
-Snap-Sanitise is a microservice with an accompanying web interface designed to help users manage sensitive words via a CRUD interface. It allows them to submit text which will be sanitised by replacing sensitive words with asterisks (******)
+Snap-Sanitise is a microservice with an accompanying UI designed to help users manage sensitive words via a CRUD interface. It allows them to submit text which will be sanitised by replacing sensitive words with asterisks (******)
 
 ## General Approach and Design Decisions
 
-The application is designed as a simple server-client CRUD application. The frontend provides a user interface where users can manage words, characters, and phrases. Users can click on UI tiles to select words, and edit them via a modal. A textbox enables users to type or paste text which they can submit to the server for processing. 
+The service is designed as a simple server-client CRUD application. The frontend provides a user interface where users can manage words, characters, and phrases. Users can click on UI tiles to select, edit and delete words via a modal. A textbox enables users to type or paste text which they can submit to the server for processing. 
 
-On the backend, saved words are retrieved from the database and used to sanitise the input string. The sanitisation is performed using a regular expression and the `replaceAll` method to replace all instances of sensitive words with asterisks (******).
+On the backend, all the saved words are retrieved from the database and used to sanitise the input string. The sanitisation is performed using a regular expression and the `replaceAll` method to replace all instances of sensitive words with asterisks (******).
 
 **Handling Edge Cases**: Several edge cases were accounted for in the sanitisation process:
    - **Capitalisation**: The sanitiser accounts for various case formats (e.g., "Word", "word") to ensure all instances are replaced.
@@ -36,7 +36,7 @@ snap-sanitise/
                         ├── service/          # Service layers
 snap-sanitise/
 └── snap-sanitise-fe/
-    ├── public/                # Public files (e.g., index.html)
+    ├── public/                # Public files
     └── src/                   # Source files
         ├── assets/            # Static assets (images, fonts, etc.)
         ├── components/        # React components
@@ -48,7 +48,7 @@ snap-sanitise/
 
 I wrote unit tests for each application layer on the back end using Mockito and JUnit. I covered repositories, services, and controllers. I also tested all edge cases of the sanitisation algorithm to ensure robust functionality. Although I intended to write component-based tests for the React UI, I ran out of time and instead manually tested the frontend.
 
-All backend tests runnable via runnning `./mvnw test` in the main directory.
+All backend tests can be run via by running theg `./mvnw test` command in the main backend directory.
 
 ## Documentation
 The initial setup has been done for openapi docs in the project. You can access the docs here [This link](http://localhost:8080/docs.html) 
@@ -64,7 +64,7 @@ The initial setup has been done for openapi docs in the project. You can access 
 - Run `docker compose up` and wait for the containers to start.
 - The UI application should be available in your browser at [This link](http://localhost:3000/).
 
-### If not using docker (you should)
+### If not using docker (The path less travelled)
 
 #### Prerequisites
 - **Java** (version 21 or higher)
