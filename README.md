@@ -1,6 +1,6 @@
 # Snap-Sanitise: Sensitive Words Management and Sanitization Microservice
 
-Snap-Sanitise is a microservice with an accompanying web interface designed to help users manage sensitive words via a CRUD interface and sanitise text by replacing sensitive words with asterisks (******)
+Snap-Sanitise is a microservice with an accompanying web interface designed to help users manage sensitive words via a CRUD interface. It allows them to submit text which will be sanitised by replacing sensitive words with asterisks (******)
 
 ## General Approach and Design Decisions
 
