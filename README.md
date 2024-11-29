@@ -61,8 +61,8 @@ The initial setup has been done for openapi docs in the project. You can access 
 - You will need a terminal, but the other dependencies are included via docker.
 - Ensure your localhost ports 3000 and 8080 are not occupied. The containers will need them.
 - Using your terminal cd into the main directory.
-- Run `docker-compose build` and wait for the image to finish building.
-- Run `docker-compose up` and wait for the containers to start.
+- Run `docker compose build` and wait for the image to finish building.
+- Run `docker compose up` and wait for the containers to start.
 - The UI application should be available in your browser at [This link](http://localhost:3000/).
 
 ### If not using docker (you should)
