@@ -30,6 +30,8 @@ public class SanitisationService {
         return sanitisedString;
     }
     private boolean stringContainsSpecialCharacters(String string) {
-        return Pattern.compile(".*[^a-zA-Z0-9].*").matcher(string).matches();
+        return Pattern.compile(".*[^a-zA-Z0-9].*")
+                      .matcher(string)
+                      .matches();
     }
 }
