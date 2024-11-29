@@ -47,7 +47,7 @@ export default function SanitiseContainer() {
         ></textarea>
         <p className="text-sm text-red-700 mb-6 -mt-6">{message}</p>
         <button
-          className="text-white bg-gray py-2 px-4 w-[150px] rounded-xl mb-6"
+          className="text-white bg-gray py-2 px-4 w-[150px] rounded-xl mb-6 cursor-pointer"
           disabled={!input}>
           Sanitise Text
         </button>
