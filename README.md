@@ -48,10 +48,10 @@ snap-sanitise/
 
 I wrote unit tests for each application layer on the back end using Mockito and JUnit. I covered repositories, services, and controllers. I also tested all edge cases of the sanitisation algorithm to ensure robust functionality. Although I intended to write component-based tests for the React UI, I ran out of time and instead manually tested the frontend.
 
-All backend tests can be run via by running theg `./mvnw test` command in the main backend directory.
+All backend tests can be run via by running the `./mvnw test` command in the main backend directory.
 
 ## Documentation
-The initial setup has been done for openapi docs in the project. You can access the docs here [This link](http://localhost:8080/docs.html) 
+The initial setup has been done for openapi docs in the project. You can access the docs via [this link](http://localhost:8080/docs.html) 
 
 ## Setup Instructions
 
@@ -62,7 +62,7 @@ The initial setup has been done for openapi docs in the project. You can access 
 - Using your terminal, cd into the main directory.
 - Run `docker compose build` and wait for the images to finish building.
 - Run `docker compose up` and wait for the containers to start.
-- The UI application should be available in your browser at [This link](http://localhost:3000/).
+- The UI application should be available in your browser via [this link](http://localhost:3000/).
 
 ### If not using docker (The path less travelled)
 
@@ -75,13 +75,13 @@ The initial setup has been done for openapi docs in the project. You can access 
 1. Navigate to the backend directory
 2. Run `./mvnw clean install`. This deletes the target directory and cleans up compiled files to ensure a fresh build. Compiles the code, runs tests, and packages the application into a distributable .jar
 3. Run `./mvnw spring-boot:run`. This will run the Spring Boot application directly, skipping the need to package or execute a .jar (Alternatively run the application with the command `java -jar target/app-0.0.1-SNAPSHOT.jar`
-4. You can confirm that the back end is running by visiting [This link](http://localhost:8080/docs.html). This will display the project documentation.
+4. You can confirm that the back end is running by visiting [this link](http://localhost:8080/docs.html). This will display the project documentation.
 
 #### Frontend Setup
 1. Navigate to the frontend directory using your terminal.
 2. run `npm install`. This will install your React project's dependencies.
 3. run `npm run dev`. This will tell vite to start your front end application.
-4. You can confirm that your app is running by visiting [This link](http://localhost:3000/).
+4. You can confirm that your app is running by visiting [this link](http://localhost:3000/).
 
 *If you can't run the application by either of these means, your local development setup may differ from mine. In that case, contact me and we can debug your setup.*
 
