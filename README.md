@@ -48,7 +48,7 @@ snap-sanitise/
 
 I wrote unit tests for each application layer on the back end using Mockito and JUnit. I covered repositories, services, and controllers. I also tested all edge cases of the sanitisation algorithm to ensure robust functionality. Although I intended to write component-based tests for the React UI, I ran out of time and instead manually tested the frontend.
 
-All backend tests can be run via by running the `./mvnw test` command in the main backend directory.
+All backend tests can be run by running the `./mvnw test` command in the main backend directory.
 
 ## Documentation
 The initial setup has been done for openapi docs in the project. You can access the docs via [this link](http://localhost:8080/docs.html) 
